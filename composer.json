@@ -1,14 +1,14 @@
 {
-    "name": "ingenious/isupport-php-client",
-    "description": "An isupport client for php",
+    "name": "ingenious/laravel-shopping-cart",
+    "description": "An shopping cart implementation for Laravel",
     "type": "package",
-    "homepage": "https://github.com/akmatsu/isupport-php-client",
-    "keywords": ["isupport","client"],
+    "homepage": "https://github.com/gimcrack/laravel-shopping-cart",
+    "keywords": ["laravel","shopping cart"],
     "license": "MIT",
     "authors": [
         {
             "name": "Jeremy Bloomstrom",
-            "email": "jeremy.bloomstrom@matsugov.us"
+            "email": "jeremy.bloomstrom@gmail.com"
         }
     ],
     "require": {
@@ -18,7 +18,14 @@
     },
     "autoload": {
         "psr-4": {
-            "Ingenious\\Isupport\\": "src/"
+            "Ingenious\\Shopping\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Ingenious\\Shopping\\Providers\\ShoppingServiceProvider"
+            ]
         }
     }
 }

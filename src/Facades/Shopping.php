@@ -1,13 +1,13 @@
 <?php
 
-namespace Ingenious\Isupport\Facades;
+namespace Ingenious\Shopping\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @see \App\Isupport\Isupport
+ * @see Ingenious\Shopping\Shopping
  */
-class Isupport extends Facade
+class Shopping extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -16,6 +16,6 @@ class Isupport extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'Isupport';
+        return 'Shopping';
     }
 }
