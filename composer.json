@@ -1,0 +1,24 @@
+{
+    "name": "ingenious/isupport-php-client",
+    "description": "An isupport client for php",
+    "type": "package",
+    "homepage": "https://github.com/akmatsu/isupport-php-client",
+    "keywords": ["isupport","client"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jeremy Bloomstrom",
+            "email": "jeremy.bloomstrom@matsugov.us"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "laravel/framework": "~5.1",
+        "kitetail/zttp": "^0.3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Ingenious\\Isupport\\": "src/"
+        }
+    }
+}
