@@ -3,6 +3,7 @@
 namespace Ingenious\Shopping;
 
 
+use Ingenious\Shopping\Contracts\Buyable;
 use Ingenious\Shopping\Models\Cart;
 use Ingenious\Shopping\Models\CartItemCollection;
 use Ingenious\Shopping\Models\Item;
@@ -50,9 +51,9 @@ class Shopping {
      */
     public function addToCart(Item $item, $quantity = 1)
     {
-        static::cart()->items()->detach($item->id);
+        static::cart()->items()->detach($item);
 
-        static::cart()->items()->attach($item->id,compact('quantity'));
+        static::cart()->items()->attach($item,compact('quantity'));
     }
 
     /**

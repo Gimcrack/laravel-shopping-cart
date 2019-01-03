@@ -35,7 +35,7 @@ class CartItemCollection extends Collection
      */
     public function subtotal()
     {
-        return $this->pluck('item.subtotal')->sum();
+        return $this->pluck('options.subtotal')->sum();
     }
 
     /**
@@ -45,6 +45,6 @@ class CartItemCollection extends Collection
      */
     public function itemCount()
     {
-        return $this->pluck('item.quantity')->sum();
+        return $this->pluck('options.quantity')->sum();
     }
 }

@@ -2,8 +2,6 @@
 
 namespace Ingenious\Shopping\Models;
 
-use App\User;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class CartItem extends Pivot
@@ -12,7 +10,8 @@ class CartItem extends Pivot
 
     protected $casts = [
         'quantity' => 'int',
-        'subtotal' => 'float'
+        'price' => 'int',
+        'subtotal' => 'float',
     ];
 
     protected $appends = [
@@ -30,7 +29,7 @@ class CartItem extends Pivot
     }
 
     /**
-     * A CartItem has an item
+     * A CartItem has an Item
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */

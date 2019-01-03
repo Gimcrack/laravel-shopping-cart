@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCartItemTable extends Migration
+class CreateVariantsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateCartItemTable extends Migration
      */
     public function up()
     {
-        Schema::create('cart_item', function (Blueprint $table) {
-            $table->unsignedInteger('cart_id')->index();
-            $table->unsignedInteger('item_id')->nullable();
-            $table->unsignedInteger('quantity');
-
-            $table->unique(['cart_id', 'item_id']);
+        Schema::create('variants', function (Blueprint $table) {
+            $table->increments('id');
+            $table->morphs('buyable');
+            $table->json('details');
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateCartItemTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cart_item');
+        Schema::dropIfExists('items');
     }
 }

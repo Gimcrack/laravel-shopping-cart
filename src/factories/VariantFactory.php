@@ -1,12 +1,16 @@
 <?php
 
 use Faker\Generator as Faker;
+use Ingenious\Shopping\Models\Item;
 
-$factory->define(Ingenious\Shopping\Models\Item::class, function (Faker $faker) {
+$factory->define(Ingenious\Shopping\Models\Variant::class, function (Faker $faker) {
     return [
-        'name' => $faker->word,
-        'base_description' => $faker->sentence,
-        'base_price' => $faker->randomFloat(2,0,100)
+        'buyable_id' => factory(Item::class)->create()->id,
+        'buyable_type' => Item::class,
+        'details' => [
+            'description' => $faker->sentence,
+            'price' => $faker->randomFloat(2,0,100)
+        ]
     ];
 });
 //
