@@ -25,14 +25,14 @@ class Cart extends Model
     }
 
     /**
-     * A cart can have many items
+     * A cart can have many variants
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function items()
+    public function contents()
     {
-        return $this->belongsToMany(Item::class, 'cart_item')
-            ->using(CartItem::class)
+        return $this->belongsToMany(Variant::class, 'cart_variant')
+            ->using(CartVariant::class)
             ->as('options')
             ->withPivot(['quantity']);
     }

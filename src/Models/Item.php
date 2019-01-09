@@ -11,63 +11,26 @@ class Item extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'meta' => 'array'
-    ];
-
-    protected $appends = [
-        'price',
-        'description',
-        'photo',
-        'meta'
+        'base_meta' => 'array'
     ];
 
     /**
-     * An item has a Buyable thing
+     * Set the base_meta
      *
-     * @return \Illuminate\Database\Eloquent\Relations\MorphTo
+     * @param $value
      */
-    public function buyable()
+    public function setMetaAttribute($value)
     {
-        return $this->morphTo();
+        $this->attributes['base_meta'] = json_encode($value);
     }
 
     /**
-     * Get the price attribute
+     * Set the Item base_price
      *
-     * @return int
+     * @param $base_price
      */
-    public function getPriceAttribute()
+    public function setPrice($base_price)
     {
-        return (int) ($this->buyable->price ?? $this->base_price);
-    }
-
-    /**
-     * Get the description attribute
-     *
-     * @return mixed
-     */
-    public function getDescriptionAttribute()
-    {
-        return $this->buyable->description ?? $this->base_description;
-    }
-
-    /**
-     * Get the photo attribute
-     *
-     * @return mixed
-     */
-    public function getPhotoAttribute()
-    {
-        return $this->buyable->photo ?? $this->base_photo;
-    }
-
-    /**
-     * Get the meta attribute
-     *
-     * @return array
-     */
-    public function getMetaAttribute()
-    {
-        return array_merge($this->base_meta ?? [], $this->buyable->meta ?? []);
+        $this->update(compact('base_price'));
     }
 }

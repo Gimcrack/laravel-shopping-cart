@@ -20,9 +20,6 @@ class CreateItemsTable extends Migration
             $table->text('base_description')->nullable();
             $table->text('base_photo')->nullable();
             $table->json('base_meta')->nullable();
-
-            $table->unsignedInteger('buyable_id')->nullable();
-            $table->string('buyable_type')->nullable();
             $table->timestamps();
         });
     }

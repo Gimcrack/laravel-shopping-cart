@@ -4,13 +4,13 @@ namespace Ingenious\Shopping\Models;
 
 use Illuminate\Support\Collection;
 
-class CartItemCollection extends Collection
+class CartContents extends Collection
 {
     /**
      * Create a new collection
      *
      * @param $items
-     * @return \Ingenious\Shopping\Models\CartItemCollection
+     * @return \Ingenious\Shopping\Models\CartContents
      */
     public static function collect($items)
     {

@@ -5,8 +5,10 @@ namespace Ingenious\Shopping;
 
 use Ingenious\Shopping\Contracts\Buyable;
 use Ingenious\Shopping\Models\Cart;
-use Ingenious\Shopping\Models\CartItemCollection;
+use Ingenious\Shopping\Models\CartContents;
 use Ingenious\Shopping\Models\Item;
+use Ingenious\Shopping\Models\Variant;
+use function last;
 
 class Shopping {
 
@@ -44,26 +46,41 @@ class Shopping {
     }
 
     /**
-     * Add the item to cart
+     * Add the Variant to cart
      *
-     * @param \Ingenious\Shopping\Models\Item $item
+     * @param \Ingenious\Shopping\Models\Variant $variant
      * @param int $quantity
      */
-    public function addToCart(Item $item, $quantity = 1)
+    public function addToCart(Variant $variant, $quantity = 1)
     {
-        static::cart()->items()->detach($item);
+        if ( $quantity <= 0 ) {
+            $this->removeFromCart($variant);
+            return;
+        }
 
-        static::cart()->items()->attach($item,compact('quantity'));
+        static::cart()->contents()->detach($variant);
+
+        static::cart()->contents()->attach($variant,compact('quantity'));
+    }
+
+    /**
+     * Remove the Variant from the cart
+     *
+     * @param \Ingenious\Shopping\Models\Variant $variant
+     */
+    public function removeFromCart(Variant $variant)
+    {
+        static::cart()->contents()->detach($variant);
     }
 
     /**
      * Get the cart's items
      *
-     * @return \Ingenious\Shopping\Models\CartItemCollection
+     * @return \Ingenious\Shopping\Models\CartContents
      */
-    public function items()
+    public function contents()
     {
-        return CartItemCollection::collect(static::cart()->items);
+        return CartContents::collect(static::cart()->fresh()->contents);
     }
 
     /**
@@ -73,7 +90,7 @@ class Shopping {
      */
     public function count()
     {
-        return static::items()->itemCount() ?? 0;
+        return static::contents()->itemCount() ?? 0;
     }
 
     /**
@@ -83,7 +100,7 @@ class Shopping {
      */
     public function distinctCount()
     {
-        return static::items()->count() ?? 0;
+        return static::contents()->count() ?? 0;
     }
 
     /**
@@ -93,7 +110,7 @@ class Shopping {
      */
     public function subtotal()
     {
-        return static::items()->subtotal();
+        return static::contents()->subtotal();
     }
 
     /**

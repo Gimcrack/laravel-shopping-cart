@@ -16,7 +16,19 @@ interface Buyable
 
     public function getPrice();
 
+    public function setPrice($price);
+
     public function getDescription();
 
+    public function setDescription($description);
+
     public function getPhoto();
+
+    public function setPhoto($photo);
+
+    public function getMeta();
+
+    public function setMeta($meta);
+
+    public function variant();
 }

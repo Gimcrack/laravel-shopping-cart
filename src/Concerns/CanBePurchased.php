@@ -3,6 +3,8 @@
 namespace Ingenious\Shopping\Concerns;
 
 
+use Ingenious\Shopping\Models\Variant;
+
 trait CanBePurchased
 {
     /**
@@ -28,11 +30,21 @@ trait CanBePurchased
     /**
      * Get the price of the item
      *
-     * @return float
+     * @return int | null
      */
     public function getPrice()
     {
-        return (float) $this->price;
+        return $this->price;
+    }
+
+    /**
+     * Set the price
+     *
+     * @param $price
+     */
+    public function setPrice($price)
+    {
+        $this->update(compact('price'));
     }
 
     /**
@@ -46,6 +58,16 @@ trait CanBePurchased
     }
 
     /**
+     * Set the description
+     *
+     * @param $description
+     */
+    public function setDescription($description)
+    {
+        $this->update(compact('description'));
+    }
+
+    /**
      * Get the photo
      *
      * @return string
@@ -53,5 +75,56 @@ trait CanBePurchased
     public function getPhoto()
     {
         return $this->photo;
+    }
+
+    /**
+     * Set the photo
+     *
+     * @param $photo
+     */
+    public function setPhoto($photo)
+    {
+        $this->update(compact('photo'));
+    }
+
+    /**
+     * Get the meta
+     *
+     * @return array
+     */
+    public function getMeta()
+    {
+        return $this->meta;
+    }
+
+    /**
+     * Set the meta
+     *
+     * @param $meta
+     */
+    public function setMeta($meta)
+    {
+        $this->meta = $meta;
+        $this->save();
+    }
+
+    /**
+     * Set the meta
+     *
+     * @param $value
+     */
+    public function setMetaAttribute($value)
+    {
+        $this->attributes['meta'] = json_encode($value);
+    }
+
+    /**
+     * A Product morphs a Variant
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
+    public function variant()
+    {
+        return $this->morphOne(Variant::class, 'buyable');
     }
 }

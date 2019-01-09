@@ -6,32 +6,10 @@ $factory->define(Ingenious\Shopping\Models\Item::class, function (Faker $faker) 
     return [
         'name' => $faker->word,
         'base_description' => $faker->sentence,
-        'base_price' => $faker->randomFloat(2,0,100)
+        'base_price' => $faker->randomFloat(2,0,100),
+        'base_photo' => $faker->word,
+        'base_meta' => []
     ];
 });
-//
-//$factory->state(Ingenious\Shopping\Models\Cart::class, 'user', function( Faker $faker ) {
-//    return [
-//        'user_id' => factory(App\User::class)->create()->id,
-//        'session_id' => null,
-//        'completed_flag' => false
-//    ];
-//});
-//
-//$factory->state(Ingenious\Shopping\Models\Cart::class, 'session', function( Faker $faker ) {
-//    return [
-//        'user_id' => null,
-//        'session_id' => session()->getId(),
-//        'completed_flag' => false
-//    ];
-//});
-//
-//$factory->state(Ingenious\Shopping\Models\Cart::class, 'order', function( Faker $faker ) {
-//    return [
-//        'user_id' => factory(App\User::class)->create()->id,
-//        'session_id' => null,
-//        'completed_flag' => true
-//    ];
-//});
 
 

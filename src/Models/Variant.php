@@ -11,16 +11,28 @@ class Variant extends Model
     protected $guarded = [];
 
     protected $casts = [
-        'details' => 'array'
+        'meta' => 'array'
     ];
 
     protected $appends = [
         'price',
-        'description'
+        'description',
+        'photo',
+        'meta'
     ];
 
     /**
-     * A Variant belongs to a buyable thing
+     * A Variant belongsTo an Item
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function item()
+    {
+        return $this->belongsTo(Item::class);
+    }
+
+    /**
+     * A Variant has a Buyable
      *
      * @return \Illuminate\Database\Eloquent\Relations\MorphTo
      */
@@ -36,7 +48,7 @@ class Variant extends Model
      */
     public function getPriceAttribute()
     {
-        return $this->details['price'] ?? $this->buyable->price;
+        return $this->buyable->getPrice() ?? $this->item->base_price;
     }
 
     /**
@@ -46,6 +58,26 @@ class Variant extends Model
      */
     public function getDescriptionAttribute()
     {
-        return $this->details['description'] ?? $this->buyable->description;
+        return $this->buyable->getDescription() ?? $this->item->base_description;
+    }
+
+    /**
+     * Get the photo attribute
+     *
+     * @return string
+     */
+    public function getPhotoAttribute()
+    {
+        return $this->buyable->getPhoto() ?? $this->item->base_photo;
+    }
+
+    /**
+     * Get the meta attribute
+     *
+     * @return array
+     */
+    public function getMetaAttribute()
+    {
+        return array_merge( $this->item->base_meta, $this->buyable->getMeta() );
     }
 }

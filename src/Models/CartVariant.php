@@ -4,7 +4,7 @@ namespace Ingenious\Shopping\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class CartItem extends Pivot
+class CartVariant extends Pivot
 {
     protected $guarded = [];
 
@@ -25,16 +25,16 @@ class CartItem extends Pivot
      */
     public function getSubtotalAttribute()
     {
-        return $this->item->price * $this->quantity;
+        return $this->variant->price * $this->quantity;
     }
 
     /**
-     * A CartItem has an Item
+     * A CartVariant has a Variant
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function item()
+    public function variant()
     {
-        return $this->belongsTo(Item::class);
+        return $this->belongsTo(Variant::class);
     }
 }
