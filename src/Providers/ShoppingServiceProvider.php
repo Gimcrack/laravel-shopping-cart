@@ -2,6 +2,7 @@
 
 namespace Ingenious\Shopping\Providers;
 
+use Ingenious\Shopping\Billing\PaymentGateway;
 use Ingenious\Shopping\Shopping;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Database\Eloquent\Factory as EloquentFactory;
@@ -47,6 +48,10 @@ class ShoppingServiceProvider extends ServiceProvider
         $this->app->singleton('Shopping', function() {
             return new Shopping;
         } );
+
+        $this->app->singleton('PaymentGateway', function() {
+            return new PaymentGateway;
+        });
     }
 
     /**
